@@ -100,7 +100,7 @@ class OpenAiHelper:
                     }
                 ]
         return openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="qwen-plus",
             user=user,
             messages=message,
             **kwargs
@@ -131,6 +131,11 @@ class OpenAiHelper:
                                "\n{\"title\":string,\"version\":string,\"part\":string,\"year\":string,\"resolution\":string,\"season\":number|null,\"episode\":number|null}"
             completion = self.__get_model(prompt=_filename_prompt, message=filename)
             result = completion.choices[0].message.content
+            # remove the markdown code block
+            if result.startswith("```json") and result.endswith("```"):
+                result = result[8:-3].strip()
+            elif result.startswith("```") and result.endswith("```"):
+                result = result[3:-3].strip()
             return json.loads(result)
         except Exception as e:
             print(f"{str(e)}：{result}")
