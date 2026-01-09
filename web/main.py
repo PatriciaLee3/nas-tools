@@ -201,7 +201,7 @@ def login():
 def web():
     # 跳转页面
     GoPage = request.args.get("next") or ""
-    # 判断当前的运营环境
+    # 判断当前的运行环境
     SystemFlag = SystemUtils.get_system()
     SyncMod = Config().get_config('media').get('default_rmt_mode')
     TMDBFlag = 1 if Config().get_config('app').get('rmt_tmdbkey') else 0
