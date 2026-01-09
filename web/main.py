@@ -99,7 +99,7 @@ def add_header(r):
 # 定义获取登录用户的方法
 @LoginManager.user_loader
 def load_user(user_id):
-    return User().get(user_id)
+    return User.get(user_id)
 
 
 # 页面不存在
@@ -182,7 +182,7 @@ def login():
         remember = request.form.get('remember')
         if not username:
             return redirect_to_login('请输入用户名')
-        user_info = User().get_user(username)
+        user_info = User.get_user(username)
         if not user_info:
             return redirect_to_login('用户名或密码错误')
         # 校验密码
@@ -215,7 +215,6 @@ def web():
     Indexers = Indexer().get_indexers()
     SearchSource = "douban" if Config().get_config("laboratory").get("use_douban_titles") else "tmdb"
     CustomScriptCfg = SystemConfig().get(SystemConfigKey.CustomScript)
-    CooperationSites = current_user.get_authsites()
     Menus = WebAction().get_user_menus().get("menus") or []
     Commands = WebAction().get_commands()
     return render_template('navigation.html',
@@ -232,7 +231,6 @@ def web():
                            Indexers=Indexers,
                            SearchSource=SearchSource,
                            CustomScriptCfg=CustomScriptCfg,
-                           CooperationSites=CooperationSites,
                            DefaultPath=DefaultPath,
                            Menus=Menus,
                            Commands=Commands)
@@ -293,8 +291,7 @@ def index():
 def search():
     # 权限
     if current_user.is_authenticated:
-        username = current_user.username
-        pris = User().get_user(username).get("pris")
+        pris = current_user.pris
     else:
         pris = ""
     # 结果

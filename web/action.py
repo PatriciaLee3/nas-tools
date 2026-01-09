@@ -1697,9 +1697,9 @@ class WebAction:
             pris = data.get("pris")
             if isinstance(pris, list):
                 pris = ",".join(pris)
-            ret = User().add_user(name, password, pris)
+            ret = User.add_user(name, password, pris)
         else:
-            ret = User().delete_user(name)
+            ret = User.delete_user(name)
 
         if ret == 1 or ret:
             return {"code": 0, "success": False}
@@ -3925,7 +3925,7 @@ class WebAction:
         """
         查询所有用户
         """
-        user_list = User().get_users()
+        user_list = User.get_users()
         Users = []
         for user in user_list:
             pris = str(user.PRIS).split(",")
@@ -4763,7 +4763,7 @@ class WebAction:
                 params = UserSiteAuthParams.get("params")
             else:
                 return {"code": 1, "msg": "参数错误"}
-        state, msg = User().check_user(site, params)
+        state, msg = User.check_user(site, params)
         if state:
             # 保存认证数据
             SystemConfig().set(key=SystemConfigKey.UserSiteAuthParams,
