@@ -2394,6 +2394,12 @@ class WebAction:
                 'fav': fav,
                 'rssid': rssid
             })
+
+        # 图片URL通过/img接口中转
+        for res in res_list:
+            if res.get('image'):
+                res['image'] = f"/img?url={res['image']}"
+
         return {"code": 0, "Items": res_list}
 
     @staticmethod
