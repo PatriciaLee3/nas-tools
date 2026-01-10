@@ -196,7 +196,15 @@ class WebUtils:
         """
         带缓存的请求
         """
-        ret = RequestUtils().get_res(url)
+        parsed_url = url.lower()
+        
+        # 豆瓣图片
+        if 'douban' in parsed_url:
+            # From https://github.com/linyuan0213/nas-tools
+            ret = RequestUtils(referer="https://movie.douban.com").get_res(url)
+        else:
+            ret = RequestUtils().get_res(url)
+            
         if ret:
             return ret.content
         return None
