@@ -1,4 +1,4 @@
-from functools import lru_cache
+from cachetools import cached, TTLCache
 from urllib.parse import quote
 
 import cn2an
@@ -191,7 +191,7 @@ class WebUtils:
         return range(StartPage, EndPage + 1)
 
     @staticmethod
-    @lru_cache(maxsize=128)
+    @cached(cache=TTLCache(maxsize=128, ttl=60))
     def request_cache(url):
         """
         带缓存的请求

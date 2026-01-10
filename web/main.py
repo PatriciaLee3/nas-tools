@@ -1660,8 +1660,11 @@ def Img():
     if if_none_match and if_none_match == etag:
         return make_response('', 304)
     # 获取图片数据
+    image_data = WebUtils.request_cache(url)
+    if not image_data:
+        return make_response("无法获取图片", 502)
     response = Response(
-        WebUtils.request_cache(url),
+        image_data,
         mimetype='image/jpeg'
     )
     response.headers.set('Cache-Control', 'max-age=604800')
