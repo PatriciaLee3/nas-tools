@@ -5,25 +5,6 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-# 运行环境判断
-is_executable = getattr(sys, 'frozen', False)
-is_windows_exe = is_executable and (os.name == "nt")
-if is_windows_exe:
-    # 托盘相关库
-    import threading
-    from package.trayicon import TrayIcon, NullWriter
-
-if is_executable:
-    # 可执行文件初始化环境变量
-    config_path = os.path.join(os.path.dirname(sys.executable), "config").replace("\\", "/")
-    os.environ["NASTOOL_CONFIG"] = os.path.join(config_path, "config.yaml").replace("\\", "/")
-    os.environ["NASTOOL_LOG"] = os.path.join(config_path, "logs").replace("\\", "/")
-    try:
-        if not os.path.exists(config_path):
-            os.makedirs(config_path)
-    except Exception as err:
-        print(str(err))
-
 from config import Config
 import log
 from web.action import WebAction
@@ -52,7 +33,7 @@ def sigal_handler(num, stack):
     os._exit(0)
 
 
-def get_run_config(forcev4=False):
+def get_run_config():
     """
     获取运行配置
     """
@@ -64,9 +45,7 @@ def get_run_config(forcev4=False):
 
     app_conf = Config().get_config('app')
     if app_conf:
-        if forcev4:
-            _web_host = "0.0.0.0"
-        elif app_conf.get("web_host"):
+        if app_conf.get("web_host"):
             _web_host = app_conf.get("web_host").replace('[', '').replace(']', '')
         _web_port = int(app_conf.get('web_port')) if str(app_conf.get('web_port', '')).isdigit() else 3000
         _ssl_cert = app_conf.get('ssl_cert')
@@ -119,27 +98,8 @@ start_service()
 
 # 本地运行
 if __name__ == '__main__':
-    # Windows启动托盘
-    if is_windows_exe:
-        homepage = Config().get_config('app').get('domain')
-        if not homepage:
-            homepage = "http://localhost:%s" % str(Config().get_config('app').get('web_port'))
-        log_path = os.environ.get("NASTOOL_LOG")
-
-        sys.stdout = NullWriter()
-        sys.stderr = NullWriter()
-
-
-        def traystart():
-            TrayIcon(homepage, log_path)
-
-
-        if len(os.popen("tasklist| findstr %s" % os.path.basename(sys.executable), 'r').read().splitlines()) <= 2:
-            p1 = threading.Thread(target=traystart, daemon=True)
-            p1.start()
-
     # 初始化浏览器驱动
     init_chrome()
 
     # Flask启动
-    App.run(**get_run_config(is_windows_exe))
+    App.run(**get_run_config())

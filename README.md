@@ -43,12 +43,7 @@ export NASTOOL_CONFIG="/xxx/config/config.yaml"
 nohup python3 run.py & 
 ```
 
-### 3、可执行文件
-下载打包好的执行文件运行即可，会自动生成配置文件目录：
-
-https://github.com/NAStool/nas-tools/releases
-
-### 4、群晖套件
+### 3、群晖套件
 添加矿神群晖SPK套件源直接安装：
 
 https://spk.imnks.com/
