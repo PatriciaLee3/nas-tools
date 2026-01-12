@@ -1,0 +1,29 @@
+# CodeQL Configuration for NAS-Tools
+
+include-paths:
+  - app
+  - web
+  - config.py
+  - initializer.py
+  - run.py
+
+exclude-paths:
+  # Third-party vendored libraries
+  - third_party
+
+  # Test files
+  - tests
+  - test_*.py
+  - *_test.py
+
+  # Build artifacts and virtual environments
+  - .venv
+  - __pycache__
+  - '*.pyc'
+  - build
+  - dist
+
+  # Configuration and data directories
+  - config
+  - docker
+  - scripts
