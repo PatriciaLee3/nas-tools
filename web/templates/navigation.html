@@ -1180,8 +1180,8 @@
 
 </script>
 
-<!-- KBar -->
 <script type="text/javascript">
+  // KBar
   const dialog = document.querySelector('cmd-dialog');
   const theme = localStorage.getItem("tablerTheme");
   if (theme) {
@@ -1214,6 +1214,40 @@
       {% endif %}
     {% endfor %}
   ];
+
+  // navbar
+  const navbar = document.querySelector('layout-navbar');
+  if (navbar) {
+    navbar.navbar_list = [
+      {% for Menu in Menus %}
+        {% if Menu.page %}
+          {
+            name: '{{ Menu.name }}',
+            page: '{{ Menu.page }}',
+            icon: `{{ Menu.icon|safe }}`,
+          },
+        {% elif Menu.list %}
+          {
+            name: '{{ Menu.name }}'
+            {% if Menu.also %},
+            also: '{{ Menu.also }}'
+            {% endif %},
+            list: [
+              {% for SubMenu in Menu.list %}
+                {% if SubMenu.page %}
+                  {
+                    name: '{{ SubMenu.name }}',
+                    page: '{{ SubMenu.page }}',
+                    icon: `{{ SubMenu.icon|safe }}`,
+                  },
+                {% endif %}
+              {% endfor %}
+            ],
+          },
+        {% endif %}
+      {% endfor %}
+    ];
+  }
 </script>
 
 <!-- 用户自定义CSS -->

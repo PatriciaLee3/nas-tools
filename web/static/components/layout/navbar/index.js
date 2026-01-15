@@ -1,6 +1,6 @@
 import { LayoutNavbarButton } from "./button.js"; export { LayoutNavbarButton };
 import { html, nothing, unsafeHTML } from "../../utility/lit-core.min.js";
-import {CustomElement, Golbal} from "../../utility/utility.js";
+import {CustomElement} from "../../utility/utility.js";
 
 export class LayoutNavbar extends CustomElement {
   static properties = {
@@ -26,14 +26,6 @@ export class LayoutNavbar extends CustomElement {
     this._is_update = false;
     this._is_expand = false;
     this.classList.add("navbar","navbar-vertical","navbar-expand-lg","lit-navbar-fixed","lit-navbar","lit-navbar-hide-scrollbar");
-    // 加载菜单
-    Golbal.get_cache_or_ajax("get_user_menus", "usermenus", {},
-      (ret) => {
-        if (ret.code === 0) {
-          this.navbar_list = ret.menus;
-        }
-      },false
-    );
   }
 
   firstUpdated() {
