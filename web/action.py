@@ -209,8 +209,6 @@ class WebAction:
             "run_directory_sync": self.__run_directory_sync,
             "update_plugin_config": self.__update_plugin_config,
             "get_season_episodes": self.__get_season_episodes,
-            "get_user_menus": self.get_user_menus,
-            "get_top_menus": self.get_top_menus,
             "auth_user_level": self.auth_user_level,
             "update_downloader": self.__update_downloader,
             "del_downloader": self.__del_downloader,
@@ -1280,7 +1278,7 @@ class WebAction:
 
         # 源目录检查
         if not source:
-            return {"code": 1, "msg": f'源目录不能为空'}
+            return {"code": 1, "msg": '源目录不能为空'}
         if not os.path.exists(source):
             return {"code": 1, "msg": f'{source}目录不存在'}
         # windows目录用\，linux目录用/
@@ -4723,35 +4721,6 @@ class WebAction:
         return {
             "code": 0,
             "episodes": episodes
-        }
-
-    @staticmethod
-    def get_user_menus():
-        """
-        查询用户菜单
-        """
-        # 需要过滤的菜单
-        ignore = []
-        # 查询最早加入PT站的时间, 如果不足一个月, 则隐藏刷流任务
-        first_pt_site = SiteUserInfo().get_pt_site_min_join_date()
-        if not first_pt_site or not StringUtils.is_one_month_ago(first_pt_site):
-            ignore.append('brushtask')
-        # 获取可用菜单
-        menus = current_user.get_usermenus(ignore=ignore)
-        return {
-            "code": 0,
-            "menus": menus,
-            "level": current_user.level
-        }
-
-    @staticmethod
-    def get_top_menus():
-        """
-        查询顶底菜单列表
-        """
-        return {
-            "code": 0,
-            "menus": current_user.get_topmenus()
         }
 
     @staticmethod

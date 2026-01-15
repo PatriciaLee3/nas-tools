@@ -45,9 +45,11 @@ from config import PT_TRANSFER_INTERVAL, Config, TMDB_API_DOMAINS
 from web.action import WebAction
 from web.apiv1 import apiv1_bp
 from web.backend.WXBizMsgCrypt3 import WXBizMsgCrypt
+from web.backend.menu import build_user_menus, SERVICE_CONF
 from web.backend.user import User
 from web.backend.wallpaper import get_login_wallpaper
 from web.backend.web_utils import WebUtils
+from web.extensions.icon_helper import register_icon_helper
 from web.security import require_auth
 
 # 配置文件锁
@@ -61,6 +63,9 @@ App.config['JSON_SORT_KEYS'] = False
 App.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 25}
 App.secret_key = os.urandom(24)
 App.permanent_session_lifetime = datetime.timedelta(days=30)
+
+# Register custom template globals
+register_icon_helper(App)
 
 # Flask Socket
 Sock = Sock(App)
@@ -215,7 +220,7 @@ def web():
     Indexers = Indexer().get_indexers()
     SearchSource = "douban" if Config().get_config("laboratory").get("use_douban_titles") else "tmdb"
     CustomScriptCfg = SystemConfig().get(SystemConfigKey.CustomScript)
-    Menus = WebAction().get_user_menus().get("menus") or []
+    Menus = build_user_menus(current_user.menu_permissions)
     Commands = WebAction().get_commands()
     return render_template('navigation.html',
                            GoPage=GoPage,
@@ -672,7 +677,7 @@ def service():
     SyncPaths = Sync().get_sync_path_conf()
 
     # 所有服务
-    Services = current_user.get_services()
+    Services = SERVICE_CONF
     pt = Config().get_config('pt')
     # RSS订阅
     if "rssdownload" in Services:
@@ -968,11 +973,11 @@ def notification():
 @login_required
 def users():
     Users = WebAction().get_users().get("result")
-    TopMenus = WebAction().get_top_menus().get("menus")
+    Available_menus = current_user.menu_permissions
     return render_template("setting/users.html",
                            Users=Users,
                            UserCount=len(Users),
-                           TopMenus=TopMenus)
+                           Available_menus=Available_menus)
 
 
 # 过滤规则设置页面

@@ -1193,7 +1193,7 @@
         {
           id: '{{ Menu.page }}',
           title: '{{ Menu.name }}',
-          img: `{{ Menu.icon|safe }}`,
+          img: `{{ icon(Menu.icon) }}`,
           onAction() {
             navmenu('{{ Menu.page }}');
           },
@@ -1204,7 +1204,7 @@
             {
               id: '{{ SubMenu.page }}',
               title: '{{ SubMenu.name }}',
-              img: `{{ SubMenu.icon|safe }}`,
+              img: `{{ icon(SubMenu.icon) }}`,
               onAction() {
                 navmenu('{{ SubMenu.page }}')
               },
@@ -1224,7 +1224,7 @@
           {
             name: '{{ Menu.name }}',
             page: '{{ Menu.page }}',
-            icon: `{{ Menu.icon|safe }}`,
+            icon: `{{ icon(Menu.icon) }}`,
           },
         {% elif Menu.list %}
           {
@@ -1238,7 +1238,7 @@
                   {
                     name: '{{ SubMenu.name }}',
                     page: '{{ SubMenu.page }}',
-                    icon: `{{ SubMenu.icon|safe }}`,
+                    icon: `{{ icon(SubMenu.icon) }}`,
                   },
                 {% endif %}
               {% endfor %}
