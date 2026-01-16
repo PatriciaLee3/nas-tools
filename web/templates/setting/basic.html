@@ -1,4 +1,3 @@
-{% import 'macro/svg.html' as SVG %}
 <div class="container-xl">
   <!-- Page title -->
   <div class="page-header d-print-none">
@@ -156,7 +155,7 @@
                            autocomplete="off">
                     <span class="input-group-text">
                       <a href="javascript:set_user_agent('app\\.user_agent')" class="link-secondary" title="从浏览器中获取 User-Agent" data-bs-toggle="tooltip">
-                        {{ SVG.arrow_bar_to_left() }}
+                        {{ icon('arrow_bar_to_left') }}
                       </a>
                     </span>
                   </div>
@@ -182,7 +181,7 @@
                   自定义 CSS/JavaScript
                 </a>
                 <a href="javascript:void(0)" class="btn d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-user-script" title="自定义CSS/JavaScript">
-                  {{ SVG.code_dots() }}
+                  {{ icon('code_dots') }}
                 </a>
               </div>
               <div class="col"></div>
@@ -248,7 +247,7 @@
                            placeholder="留空不启用二级分类" autocomplete="off" name="category_name">
                     <span class="input-group-text">
                       <a href="javascript:show_category_config_modal()" class="link-secondary" title="编辑二级分类策略" data-bs-toggle="tooltip">
-                        {{ SVG.edit() }}
+                        {{ icon('edit') }}
                       </a>
                     </span>
                   </div>
@@ -418,7 +417,7 @@
                   刮削设置
                 </a>
                 <a href="javascript:void(0)" class="btn d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-scraper" title="刮削设置">
-                  {{ SVG.slideshow() }}
+                  {{ icon('slideshow') }}
                 </a>
               </div>
               <div class="col"></div>
@@ -716,14 +715,14 @@
           <li class="nav-item" role="presentation">
             <a href="#tabs-scraper-nfo" class="nav-link active" style="justify-content: center" data-bs-toggle="tab"
                aria-selected="true" role="tab">
-              <span class="me-2">{{ SVG.info_square_rounded() }}</span>
+              <span class="me-2">{{ icon('info_square_rounded') }}</span>
               元数据
             </a>
           </li>
           <li class="nav-item" role="presentation">
             <a href="#tabs-scraper-pic" class="nav-link" style="justify-content: center" data-bs-toggle="tab"
                aria-selected="false" role="tab" tabindex="-1">
-              <span class="me-2">{{ SVG.photo() }}</span>
+              <span class="me-2">{{ icon('photo') }}</span>
               图片
             </a>
           </li>

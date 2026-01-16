@@ -72,3 +72,9 @@ dependencies = [
     "webdriver-manager>=3.8.5",
     "zhconv>=1.4.3",
 ]
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.150.2",
+    "pytest>=9.0.2",
+]

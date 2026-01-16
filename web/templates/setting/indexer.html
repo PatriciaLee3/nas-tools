@@ -1,5 +1,4 @@
 {% import 'macro/form.html' as FORM %}
-{% import 'macro/svg.html' as SVG %}
 <div class="container-xl">
   <!-- Page title -->
   <div class="page-header d-print-none">
@@ -12,11 +11,11 @@
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
           <a href="javascript:show_indexer_statistics_modal()" class="btn btn-primary d-none d-sm-inline-block">
-            {{ SVG.pie() }}
+            {{ icon('pie') }}
             统计信息
           </a>
           <a href="javascript:show_indexer_statistics_modal()" class="btn btn-primary d-sm-none btn-icon" title="下载目录">
-            {{ SVG.pie() }}
+            {{ icon('pie') }}
           </a>
         </div>
       </div>

@@ -1,4 +1,3 @@
-{% import 'macro/svg.html' as SVG %}
 {% import 'macro/form.html' as FORM %}
 {% import 'macro/oops.html' as OOPS %}
 <div class="container-xl">
@@ -13,18 +12,18 @@
       <div class="col-auto ms-auto d-print-none">
         <div class="btn-list">
           <a href="javascript:show_add_downloader_modal()" class="btn btn-primary d-none d-sm-inline-block">
-            {{ SVG.plus() }}
+            {{ icon('plus') }}
             新增下载器
           </a>
           <a href="javascript:show_add_downloader_modal()" class="btn btn-primary d-sm-none btn-icon" title="下载目录">
-            {{ SVG.plus() }}
+            {{ icon('plus') }}
           </a>
           <a href="javascript:goto_download_setting()" class="btn d-none d-sm-inline-block">
-            {{ SVG.settings() }}
+            {{ icon('settings') }}
             下载设置
           </a>
           <a href="javascript:goto_download_setting()" class="btn d-sm-none btn-icon" title="下载设置">
-            {{ SVG.settings() }}
+            {{ icon('settings') }}
           </a>
         </div>
       </div>
@@ -46,9 +45,9 @@
             data-bs-toggle="tooltip"
             >
             {% if DefaultDownloader == Id %}
-              {{ SVG.star('icon-filled w-100 h-100 text-purple') }}
+              {{ icon('star', 'icon-filled w-100 h-100 text-purple') }}
             {% else %}
-              {{ SVG.star('w-100 h-100 text-muted') }}
+              {{ icon('star', 'w-100 h-100 text-muted') }}
             {% endif %}
           </span>
           <span class="avatar avatar-xl avatar-thumb avatar-rounded"
@@ -193,7 +192,7 @@
           </summary>
           <div class="row mt-2" id="div_downloader_downloaddir"></div>
           <div class="ms-2 mt-2">
-            <a href="javascript:add_downloaddir()" class="btn-icon" title="增加目录">{{ SVG.folder_plus() }}</a>
+            <a href="javascript:add_downloaddir()" class="btn-icon" title="增加目录">{{ icon('folder_plus') }}</a>
           </div>
         </details>
       </div>
@@ -567,7 +566,7 @@
       </div>
       <div class="col-12 col-lg mb-1 align-self-center" style="text-align: center">
         <a href="javascript:del_downloaddir('{DIRDIV_LEVEL}')" class="btn-icon text-red" title="删除目录">
-        {{ SVG.circle_minus() }}
+        {{ icon('circle_minus') }}
         </a>
       </div>
     </div>

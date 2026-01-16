@@ -1,0 +1,23 @@
+<!--
+category: System
+tags: [backup, save, archive, storage, cloud]
+version: "1.0"
+unicode: "f0b1"
+-->
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3a6 6 0 0 0 -9 6a6 6 0 0 0 6 6h3" />
+  <path d="M15 9v6" />
+  <path d="M12 12l3 3l-3 3" />
+  <path d="M10 21h4a4 4 0 0 0 4 -4a4 4 0 0 0 -4 -4h-1" />
+</svg>
